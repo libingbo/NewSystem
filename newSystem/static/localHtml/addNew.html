@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+</head>
+<body>
+    <form method="post">
+        <!--新闻标题输入框-->
+        <div class="input-group mb-3 input-group-lg">
+            <div class="input-group-prepend">
+            <span class="input-group-text">新闻标题:</span>
+        </div>
+            <input type="text" class="form-control" placeholder="New Title" id="bt" name="newBt">
+        </div>
+
+        <!--新闻导语输入框-->
+        <div class="input-group mb-3 input-group-lg">
+            <div class="input-group-prepend">
+            <span class="input-group-text">新闻导语:</span>
+        </div>
+            <input type="text" class="form-control" placeholder="New  Introduction" id="dy" name="newDy">
+        </div>
+
+        <!--富文本框-->
+        <textarea id="summernote" name="editordata"></textarea>
+
+        <!--提示部分-->
+        <div class="alert alert-success">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#releaseRule">
+	            我已阅读并了解新闻发布注意事项.
+            </button>
+        </div>
+        <div style="text-align:center">
+            <input type="submit" class="btn btn-info center-block" value="发布">
+        </div>
+
+    </form>
+
+
+
+         <!-- 模态框（Modal） 新闻发布规则介绍 -->
+        <div class="modal fade" id="releaseRule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            新闻发布注意事项:
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        第一条:
+                        第二条:
+                        第三条:
+                        第四条:
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"
+                                data-dismiss="modal">关闭
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
+    </script>
+
+
+
+</body>

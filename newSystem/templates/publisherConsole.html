@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}  <!-- 要使用static文件夹下的静态资源, 必须在头部声明 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布者个人页面</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!--  将 addNew() 方法包含进来 -->
+    <script src="{% static 'js/publisherConsole.js'  type='text/javascript' charset='utf-8' %} "></script>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<img alt="140x140" src="{% static 'images/systemImg/4.jpg' %}" class="img-circle" />
+		</div>
+		<div class="col-md-9">
+			<div class="tabbable tabs-left" id="tabs-234437">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel-138794" data-toggle="tab">系统消息</a>
+					</li>
+					<li>
+						<a href="#panel-98815" data-toggle="tab">留言与评论</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-138794">
+						<p>
+							第一部分内容.
+						</p>
+					</div>
+					<div class="tab-pane" id="panel-98815">
+						<p>
+							第二部分内容.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <h5 class="page-header"></h5>
+	<div class="row">
+		<div class="col-md-3">
+			<ul class="nav nav-list">
+				<li class="nav-header">
+					新闻选项:
+				</li>
+				<li class="active">
+					<a role="button" onclick="addNew();" >发布新闻</a>
+				</li>
+				<li>
+					<a href="#">编辑历史新闻</a>
+				</li>
+				<li>
+					<a href="#">删除新闻</a>
+				</li>
+				<li class="nav-header">
+					个人信息:
+				</li>
+				<li>
+					<a href="#">设置个人信息</a>
+				</li>
+				<li>
+					<a href="#">更改密码</a>
+				</li>
+				<li class="divider">
+				</li>
+				<li>
+					<a href="#">发布历史</a>
+				</li>
+			</ul>
+			<form class="form-search">
+				<input class="input-medium search-query" type="text" /> <button type="submit" class="btn">查找</button>
+			</form>
+		</div>
+		<div class="col-md-9" style="height:500px;background-color:#ddd" >
+			<iframe src=""  id="iframe_a"  height="100%" width="100%" class="mh-100 bg-warnin" ></iframe>
+		</div>
+	</div>
+</div>
+</body>
+</html>

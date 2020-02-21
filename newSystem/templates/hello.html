@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+{% load static %}  <!-- 要使用static文件夹下的静态资源, 必须在头部声明 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						 <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand"><h2>毕设新闻网</h2></a>
+						<div >
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="http://127.0.0.1:8000/hello/1">首页</a>
+								</li>
+								<li>
+									<a type="button" class="btn" data-toggle="modal" data-target="#myModal">发布新闻</a>
+								</li>
+								<li>
+									<a href="#">广告招商</a>
+								</li>
+								<li class="dropdown">
+									 <a data-toggle="dropdown" class="dropdown-toggle" href="#">功能区<strong class="caret"></strong></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">功能待完善</a>
+										</li>
+										<li>
+											<a href="#">功能待完善</a>
+										</li>
+										<li>
+											<a href="#">功能待完善</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li class="nav-header">
+											其他
+										</li>
+										<li>
+											<a href="#">功能1</a>
+										</li>
+										<li>
+											<a href="#">功能2</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="nav pull-right">
+								<li>
+									<a href="http://127.0.0.1:8000/joinFamily">加入我们</a>
+								</li>
+								<li class="divider-vertical">
+								</li>
+								<li class="dropdown">
+									 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Home<strong class="caret"></strong></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="http://127.0.0.1:8000/login" >登录</a>
+										</li>
+										<li>
+											<a href="http://127.0.0.1:8000/register" >注册</a>
+										</li>
+										<li>
+											<a href="#">我的主页</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li>
+											<a href="#" class="btn" onclick="exit();">退出</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="row">
+				<div class="span12">
+					<form class="form-search" method="post" action="http://127.0.0.1:8000/beforeFindNew/1">
+						{% csrf_token %}
+						<input class="input-medium search-query" type="text" name="findNewTxt" /> <button type="submit" class="btn">查找</button>
+					</form>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/1/1" class="btn">时政新闻</a> <!--newKind后第一个是页数,默认都是第一页, 下一个参数是新闻种类.-->
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/2/1" class="btn">经济新闻</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/3/1" class="btn">法律新闻</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/4/1" class="btn">军事新闻</a>
+				</li>
+				<li>
+                    <a href="http://127.0.0.1:8000/newKind/5/1" class="btn">科技新闻</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/6/1" class="btn">文教新闻</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/7/1" class="btn">体育新闻</a>
+				</li>
+				<li>
+					<a href="http://127.0.0.1:8000/newKind/8/1" class="btn">社会新闻</a>
+				</li>
+                <li>
+					<a href="http://127.0.0.1:8000/newKind/9/1" class="btn">娱乐新闻</a>
+				</li>
+                <li>
+					<a href="http://127.0.0.1:8000/newKind/10/1" class="btn">热门新闻</a>
+				</li>
+                <li>
+					<a href="http://127.0.0.1:8000/newKind/11/1" class="btn">最近发布</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+
+				<!-- 新闻内容部分-->
+				<div class="span12">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>
+									标题
+								</th>
+								<th>
+									导语
+								</th>
+								<th>
+									发布时间
+								</th>
+								<th>
+									作者
+								</th>
+								<th class="hidden"> id </th>
+								<th>阅读</th>
+							</tr>
+						</thead>
+						<tbody>
+						{%for item in page %}
+							<tr>
+								<td>
+									{{ item.bt}}
+								</td>
+								<td>
+									{{ item.dy}}
+								</td>
+								<td>
+									{{ item.fbsj}}
+								</td>
+								<td>
+									{{ item.fbzyhm.yhm}}
+								</td>
+								<td class="hidden">{{ item.id}}</td>
+								<td><a href="http://127.0.0.1:8000/oneNew/{{item.id}}" class="btn btn-primary " target="_blank" >阅读</a></td>  <!-- target让超链接重新打开一个页面 -->
+							</tr>
+						 {%endfor%}
+						</tbody>
+					</table>
+				</div>
+				<div>{{not_new_message}}</div>  <!--当没有从数据库查询到任何新闻记录时 , 显示没有查到记录的提示 -->
+
+			</div>
+			<div class="row">
+				<!--底部分页按钮显示-->
+    			<nav aria-label="Page navigation">
+        			<div class="pagination">
+            			<ul class="pagination">
+					{% with url=urlKind %}
+            			{% if page.has_previous %}   <!--判断当前页是否有上一页-->
+                			<li><a href="http://127.0.0.1:8000/{{url}}/{{page.previous_page_number}}" aria-label="Previous">
+                    			<span aria-hidden="true">&laquo;</span></a></li>
+            			{% endif %}
+
+            			{% for num in page.paginator.page_range%}  <!-- 循环遍历页码列表，并展示到底部-->
+                			{%if pindex == page.number%}
+                    			<li><a href="">{{ num }}</a></li>  <!--要跳转的页是当前页 ,则超链接什么也不做 -->
+                			{%else%}
+                    			<li><a href="http://127.0.0.1:8000/{{url}}/{{num}}">{{ num }}</a></li>
+                			{%endif%}
+             			{% endfor %}
+
+             			{% if page.has_next %}  <!-- 判断当前页是否有下一页-->
+                 			<li><a href="http://127.0.0.1:8000/{{url}}/{{page.next_page_number}}" aria-label="Next">
+                      			<span aria-hidden="true">&raquo;</span></a></li>
+              			{% endif %}
+					{% endwith %}
+            			</ul>
+        			</div>
+    			</nav>
+
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<!--页体  页尾分隔线 -->
+	<h5 class="page-header"></h5>
+
+
+	<div class="row  ">
+		<div class="col-md-4 ">
+			<div class="carousel slide" id="carousel-628648">
+				<ol class="carousel-indicators">
+					<li class="active" data-slide-to="0" data-target="#carousel-628648">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-628648">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-628648">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active">
+						<img alt="" src="{% static 'images/systemImg/1.jpg' %}" />
+						<div class="carousel-caption">
+							<h4>
+								于波博物馆开馆啦!
+							</h4>
+							<p>
+								过年这几天闷坏了吧？疫情结束之后，是想先旅游，先蹦迪还是先看展？最近发现了一个宝藏展览，让你一次性把旅游、蹦迪和看展三件事儿给做完。
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static 'images/systemImg/2.jpg' %}" />
+						<div class="carousel-caption">
+							<h4>
+								约会有家
+							</h4>
+							<p>
+								可能谁也不会想到，2020年的情人节会这么冷清。娇艳的玫瑰放在认领处等待无接触收货，浪漫的餐厅里没有烛影晃动，原本是生意最好的一天，各大酒店却只能闭门谢客…… 更凄惨的是，连情侣见个面都显得不那么容易，得里三层，外三层的裹上，出门连着被体温枪指头，见了面之后连抱一下都得担心传染。唉，这个冷清的情人节哪！
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static 'images/systemImg/3.jpg' %}" />
+						<div class="carousel-caption">
+							<h4>
+								丘比特之箭
+							</h4>
+							<p>
+								呵，田园的史家，你竟能铺叙
+								一个如花的故事，比诗还瑰丽：
+								在你的形体上，岂非缭绕着
+								古老的传说，以绿叶为其边缘；
+								讲着人，或神，敦陂或阿卡狄？
+							</p>
+						</div>
+					</div>
+				</div> <a data-slide="prev" href="#carousel-628648" class="left carousel-control">‹</a> <a data-slide="next" href="#carousel-628648" class="right carousel-control">›</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<dl class="dl-horizontal">
+				<dt>
+					李浩
+				</dt>
+				<dd>
+					毕设新闻网创始人. 生于1976-09-23 , 余2002-09-08日为新闻网注册商标 , 正式开通毕设新闻网.
+				</dd>
+				<dt>
+					网站宗旨
+				</dt>
+				<dd>
+					本站为广大人民群众提供最新最客观的新闻消息.
+				</dd>
+				<dd>
+					本站禁止发布敏感信息
+				</dd>
+				<dt>
+					法人联系方式:
+				</dt>
+				<dd>
+					18097458735
+				</dd>
+				<dt>
+					举报电话:
+				</dt>
+				<dd>
+					110
+				</dd>
+			</dl>
+		</div>
+		<div class="col-md-4">
+			 <address> <strong>关注微信二维码</strong><br /> 粉丝qq讨论群:8907687868<br /> --------------------------------<br /> <img src="{% static '/images/systemImg/rwm.png' %}" class="img-thumbnail"></address>
+		</div>
+	</div>
+</div>
+
+
+
+		<!-- 模态框  发布新闻 时 用来对新闻发布者身份做一次核实-->
+		<div class="modal fade" id="myModal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+
+			  <!-- 模态框头部 -->
+			  <div class="modal-header">
+				<h4 class="modal-title">在发布新闻前 , 需要对您的身份进行一次核实</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			  </div>
+
+			  <!-- 模态框主体 -->
+			  <div class="modal-body">
+
+				<form  action="http://127.0.0.1:8000/intoPublisher" method="post" target="_blank" >
+					{% csrf_token %}
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+					  		<span class="input-group-text">用户名:</span>
+						</div>
+						<input type="text" class="form-control" placeholder="Username" name="yhm">
+				  	</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+					  		<span class="input-group-text">密码:</span>
+						</div>
+						<input type="text" class="form-control" placeholder="Password" name="mm">
+				  	</div>
+					<button  class="btn btn-primary">进入</button>
+				</form>
+			  </div>
+
+			  <!-- 模态框底部 -->
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+			  </div>
+
+			</div>
+		  </div>
+		</div>
+
+
+
+
+		<!-- 模态框（Modal） 当用户点击 发布新闻 后, 经后台验证不是新闻发布者, 弹出这个提示框 -->
+		<div class="modal fade" id="checkPublisher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">身份验证失败</h4>
+					</div>
+					<div class="modal-body">您的用户名或密码输入错误 , 请您重新检查后再次输入. 或者您还不是新闻发布者 , 点击下面这条链接进行新闻发布者身份认证后 , 开始您的新闻之旅吧!</div>
+					<a href="#" ><h4>成为新闻发布者</h4></a>
+					<div class="modal-footer">
+						<a href="{{url}}" class="btn btn-primary">返回上一页</a>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
+		<!-- 当要 发布新闻  时 , 先检查用户是不是 新闻发布者 身份 ,并在页面给用户一个提示 -->
+		 <script type="text/javascript" >
+                 var publisher_state = '{{publisher_state}}';
+                 var publisher_info = '{{publisher_info}}'
+                 if(!publisher_state){}
+                 else
+                 {
+                    if(publisher_state == '0') { //不是新闻发布者
+					$('#checkPublisher').modal('show');
+                    //alert(info);
+                    }
+                 }
+        </script>
+
+		<script  type="text/javascript" >
+			exit=function()
+			{
+				//HttpSession session=request.getSession();
+				user_name = "<%=session.getAttribute('user_name')%>";
+				if (user_name == "")
+					  { alert("未登录") ;}
+				else  {alert("退出");}
+			}
+		</script>
+
+
+</body>
+</html>

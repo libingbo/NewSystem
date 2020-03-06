@@ -139,7 +139,7 @@ class editorXWFBYHB:
 
 
 #它针对新闻浏览用户表的三种操作  添加 , 更改 ,删除
-#其中 ,删除操作为 浏览者和管理者工用
+#其中 ,删除操作为 浏览者和管理者共用
 #添加操作仅浏览者使用
 #更改操作 , 管理者角色使用ediXWLLYH_admin  浏览者角色使用ediXWLLYH_browser
 class editorXWLLYHB:
@@ -225,6 +225,18 @@ class editorXWLLYHB:
             return False
         else:
             return True
+
+    #新闻浏览用户重置密码时调用
+    #执行修改密码操作的前提是用户已经登录, 而登录阶段已经检查过密码的正确性 , 所以这里不再检查旧密码是否正确
+    def editXWLLYH_Password(self ,request ,  oldMm , newMm):
+        user_name = request.session.get('user_name')
+        try:
+            user = Xwllyhb.objects.get(yhm=user_name)
+            user.mm = newMm
+            return True
+        except:
+            return False
+
 
 
 class editorXWGLYHB:

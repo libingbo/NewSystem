@@ -40,4 +40,6 @@ urlpatterns = [
     path('findNew/<int:find_new_pindex>' , browserServer.findNew) , # 搜索新闻  搜所后, 取第一页之后的数据走这个函数
     path('beforeFindNew/<int:find_new_pindex>' , browserServer.beforeFindNew),#前端点击 搜索 时走这个函数
     path('exitUser'  , browserServer.exitUser) , # 退出
+    path('browserConsole' , browserServer.browserConsole) , #浏览者用户进入主页前的检查
+    path('browserEditPassword' , browserServer.browserEditPassword)  #浏览者用户重置密码
 ]

@@ -7,6 +7,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator  #django自带的分页功能
 from django.db.models import Q   #搜索功能 模糊查询 要用到
+from .userEngine import *
+from django.views.decorators.csrf import requires_csrf_token
 
 #完成用户登录
 def loginCheck(request):
@@ -23,6 +25,7 @@ def loginCheck(request):
             user = Xwllyhb.objects.get(yhm = yhm_sel)
             if mm_sel == user.mm: #数据库用户存在, 并且密码相同
                  #one = User.objects.create_user(username=yhm_sel, password=mm_sel)
+                 request.session.user_name = user_name  #将执行登陆成功的用户信息存在session中
                  print("用户已经存储-----------------------------------------------------------")
                  info['login_message'] = '登录成功! 用户已经储存'
                  request.session['user_name'] = yhm_sel
@@ -220,7 +223,6 @@ def beforeFindNew(request , find_new_pindex):
 def exitUser(request):
     path_info = request.path_info
     print(path_info)
-    print('9999999999999999999999999999999999999999999999999999999999999999999999999999999')
     user_name = request.session.get('user_name')
     context = {}
     if user_name is None:  #用户没有登陆过 ,返回一个无需登陆的信息
@@ -229,6 +231,39 @@ def exitUser(request):
         del request.session['user_name']
         context['exitMessage'] = '已退出登录'
     return  render(request , 'hello.html' ,context )
+
+
+# 用户进入浏览者控制台
+# 若session中存在用户 , 跳转到控制台  若不存在,跳转到登录界面
+def browserConsole(request):
+    user_name = request.session.get('user_name')
+    info = {}
+    if user_name is None :  #不存在用户,跳转到登录界面
+        info['return_home'] = '您还没有登录 ,请您先登录'
+        return render(request , 'login.html' , info )
+    else:
+        print('新闻发布者的session' + user_name)
+        return render(request , 'browserConsole.html')
+
+
+#浏览者用户重置密码
+@requires_csrf_token
+def browserEditPassword(request):
+    info = {}
+    oldMm = request.POST['oldPassword']
+    newMm = request.POST['newPassword']
+    edi = editorXWFBYHB()
+    if edi.editXWLLYH_Password(oldMm , newMm):
+        info['passwordMessage'] = "密码更改成功"
+        info['passwordState']= 0
+        return render(request , browserConsole.html , info)
+    else:
+        info['passwordMessage'] = "密码更改失败--服务器繁忙中-----"
+        info['passwordState'] = 0
+        return render(request, browserConsole.html, info)
+
+
+
 
 
 

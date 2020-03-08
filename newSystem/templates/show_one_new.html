@@ -23,12 +23,17 @@
                     <div class="span12">
                         <div class="page-header">
                             <h1>
-                                {{new.bt}}<small>------{{new.dy}}</small>
+                                {{new.bt}}
                             </h1>
+                            <h2><small>导语:{{new.dy}}</small></h2>
                         </div>
-                        <h4>
-                            作者:{{new.fbzyhm.yhm}}
-                        </h4>
+                        <h3>
+                            作者:&nbsp;{{new.fbzyhm.yhm}}
+                        </h3>
+                        <h3>
+                            发布时间:&nbsp;{{new.fbsj}}
+                        </h3>
+                        <hr style="filter: alpha(opacity=100,finishopacity=0,style=1)" width="100%" color='#987cb9' size=3>
                         <p>
                             {{new.nr}}
                         </p>
@@ -42,11 +47,12 @@
                             <div class="input-group">
                                 <span class="input-group-addon">写评论:</span>
                                 <input type="text" class="form-control" placeholder="友好的评论是交流的起点">
-                                <button type="button" class="btn btn-default btn-xs">
-                                    <span class="glyphicon  glyphicon-thumbs-up"></span> 点赞
-                                </button>
                             </div>
-                            <br>
+                            <hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="100%" color="#987cb9" size=1>
+                            <button type="button" class="btn btn-default btn-lg">
+                                    <span class="glyphicon  glyphicon-thumbs-up"></span> 点赞
+                            </button>
+                            <br><hr style="filter: progid:dximagetransform.microsoft.glow(color="#987cb9",strength=10)" width="100%" color="#987cb9" size=1>
                             <a href="#" class="btn btn-primary btn-lg" role="button">发布评论</a>
                         </form>
                     </div>

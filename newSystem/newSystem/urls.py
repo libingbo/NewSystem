@@ -27,7 +27,7 @@ from . import publisherServer
 app_name = "news"
 urlpatterns = [
     url(r'^testdb$', a.ediuser),
-    url(r'^new$' , a.addnew),
+    url(r'^new$' , view.hello),
     path('login/', view.login),  #定位到一个登录界面
     path('loginCheck' , browserServer.loginCheck),  #检查用户登录状态
     path('register' , view.register) , #跳转到注册用户

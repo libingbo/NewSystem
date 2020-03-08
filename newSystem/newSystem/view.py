@@ -2,9 +2,8 @@ from django.shortcuts import render
 
 
 def hello(request):
-    context = {}
-    context['hello'] = 'Hello World!'
-    return render(request, 'hello.html', context)
+
+    return register("http://127.0.0.1:8000/hello/1")
 
 def fbuser(request):
     return render(request, 'publisherConsole.html')

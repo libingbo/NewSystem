@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
-from PIL import Image
 import datetime
 from Bean.models import *
 from django.shortcuts import render
@@ -275,12 +274,6 @@ def updateHeadPhoto(request):
         return HttpResponse(info['formatError'])
     with open(file_name, 'wb+') as f:
         f.write(headPhoto.read())
-        im = Image.open(f)
-        (x ,y) = im.size
-        newX = 140
-        newY = 140
-        out = im.resize((newX, newY), Image.ANTIALIAS)
-        out.save(f)
         user = Xwllyhb.objects.get(yhm = user_name)
         user.tx = user_name +'.'+ headPhoto.name.split('.')[ -1]
         user.save()
@@ -295,10 +288,6 @@ def pushHeadPhoto(request):
     photoUrl = user.tx
     info['headPhoto'] = "/static/images/UserHeadPhoto/" + photoUrl
     return render(request, 'browserConsole.html', info)
-
-
-
-
 
 
 

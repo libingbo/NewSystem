@@ -1,0 +1,55 @@
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>头像</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <form role="form"  action="http://127.0.0.1:8000/updateHeadPhoto" method="post" enctype="multipart/form-data" target="_parent"> <!-- target跳出嵌套的子框 -->
+
+          <div style="position: relative;border: 5px solid lightblue;width: 150px;height:150px;margin: 5px auto;border-radius: 50%;">
+            <img src="../images/UserHeadPhoto/a_default.jpg" alt="选择并上传头像" id="avatar_img"
+                 style="width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;"/>
+            <input type="file" id="avatar_file" name="avatar_file"
+                   accept="image/jpg,image/png,image/gif"
+                   style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
+        </div>
+        <br/>
+        <div style="text-align:center">
+            <h6>点击头像上传</h6>
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+    </form>
+
+
+    <!-- 预览头像功能 -->
+    <script>
+        // 头像预览
+        $("#avatar_file").change(function () {
+            // 获取上传文件对象
+            var file = $(this)[0].files[0];
+            // 读取文件URL
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            // 阅读文件完成后触发的事件
+            reader.onload = function () {
+                // 读取的URL结果：this.result
+                $("#avatar_img").attr("src", this.result);
+            }
+        });
+    </script>
+</body>

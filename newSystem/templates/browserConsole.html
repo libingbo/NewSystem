@@ -23,10 +23,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <img alt="140x140" src="{% static 'images/systemImg/4.jpg' %}" />
+                <img alt="140x140" src="{{headPhoto}} "  class="img-circle" /><br/>
+                <hr style="filter: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#6f5499" size="3" />
                 <ul>
                     <li>
-                        更换头像
+                        <a role="button" onclick="changeHeadPhoto();" >更换头像</a>
                     </li>
                     <li>
                         <a role="button" onclick="editPassword();" >重置密码</a>

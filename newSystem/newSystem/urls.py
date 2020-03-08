@@ -41,5 +41,7 @@ urlpatterns = [
     path('beforeFindNew/<int:find_new_pindex>' , browserServer.beforeFindNew),#前端点击 搜索 时走这个函数
     path('exitUser'  , browserServer.exitUser) , # 退出
     path('browserConsole' , browserServer.browserConsole) , #浏览者用户进入主页前的检查
-    path('browserEditPassword' , browserServer.browserEditPassword)  #浏览者用户重置密码
+    path('browserEditPassword' , browserServer.browserEditPassword) , #浏览者用户重置密码
+    path('updateHeadPhoto' , browserServer.updateHeadPhoto) ,   #更新头像
+    path('pushHeadPhoto' , browserServer.pushHeadPhoto) #由于传参问题,上传头像的函数处理完成后需要重新刷新到browserConsole.html页面,并带用户头像路径 的参数过去
 ]

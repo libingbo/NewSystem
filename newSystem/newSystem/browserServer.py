@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
+from PIL import Image
 import datetime
 from Bean.models import *
 from django.shortcuts import render
@@ -243,7 +244,8 @@ def browserConsole(request):
         return render(request , 'login.html' , info )
     else:
         print('新闻发布者的session' + user_name)
-        return render(request , 'browserConsole.html')
+        info['headPhoto'] = "/static/images/UserHeadPhoto/a_default.jpg"  #静态文件的访问方式: http://localhost:8000/static下直接访问
+        return render(request , 'browserConsole.html', info)
 
 
 #浏览者用户重置密码
@@ -260,7 +262,40 @@ def browserEditPassword(request):
     else:
         info['passwordMessage'] = "密码更改失败--服务器繁忙中-----"
         info['passwordState'] = 0
-        return render(request, browserConsole.html, info)
+        return render(request, 'browserConsole.html', info)
+
+#用户点击更新头像操作后 , 执行该函数
+def updateHeadPhoto(request):
+    info = {}
+    user_name = request.session.get('user_name')
+    headPhoto = request.FILES.get('avatar_file')
+    file_name = './static/images/UserHeadPhoto/'+user_name + '.'+ headPhoto.name.split('.')[ -1]  # 构造文件名以及文件路径
+    if headPhoto.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
+        info['formatError'] = "<h4>抱歉! 上传文件格式错误 , 系统支持的文件格式: jpeg , jpg , png </h4><br/><h4> 请您尝试重新上传</h4> <br/> "
+        return HttpResponse(info['formatError'])
+    with open(file_name, 'wb+') as f:
+        f.write(headPhoto.read())
+        im = Image.open(f)
+        (x ,y) = im.size
+        newX = 140
+        newY = 140
+        out = im.resize((newX, newY), Image.ANTIALIAS)
+        out.save(f)
+        user = Xwllyhb.objects.get(yhm = user_name)
+        user.tx = user_name +'.'+ headPhoto.name.split('.')[ -1]
+        user.save()
+        return redirect("http://127.0.0.1:8000/pushHeadPhoto")
+
+
+#当用户头像路径存放到数据库中后 , 此时用户已经执行了上传头像的操作 , 需要接上面一个函数, 将browserConsole.html刷新一下, 改变img标签的src属性
+def pushHeadPhoto(request):
+    info = {}
+    user_name = request.session.get('user_name')
+    user = Xwllyhb.objects.get(yhm=user_name)
+    photoUrl = user.tx
+    info['headPhoto'] = "/static/images/UserHeadPhoto/" + photoUrl
+    return render(request, 'browserConsole.html', info)
+
 
 
 

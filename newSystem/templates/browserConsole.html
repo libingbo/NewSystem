@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>发布者个人页面</title>
+    <title>浏览者个人页面</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -25,30 +25,33 @@
             <div class="col-md-3">
                 <img alt="140x140" src="{{headPhoto}} "  class="img-circle" /><br/>
                 <hr style="filter: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#6f5499" size="3" />
-                <ul>
-                    <li>
+                <ul class="list-group">
+                    <li class="list-group-item">
                         <a role="button" onclick="changeHeadPhoto();" >更换头像</a>
                     </li>
-                    <li>
-                        <a role="button" onclick="editPassword();" >重置密码</a>
+                    <li class="list-group-item">
+                        <a role="button" onclick="editPassword();"  >重置密码</a>
                     </li>
-                    <li>
-                        修改信息
+                    <li class="list-group-item">
+                        <a role="button" onclick="editBrowserInfo();" >修改信息</a>
                     </li>
-                    <li>
-                        浏览记录
+                    <li class="list-group-item">
+                        <a role="button" onclick="editBrowserInfo();" >浏览记录</a>
                     </li>
-                    <li>
-                        我的评论
+                    <li class="list-group-item">
+                        <a role="button" onclick="editBrowserInfo();" >我的评论</a>
                     </li>
-                    <li>
-                        注销账户
+                    <li class="list-group-item">
+                        <a role="button" onclick="editBrowserInfo();" >注销账户</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://127.0.0.1:8000/hello/1" >返回首页</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-9">
                 <div class="col-md-12" style="height:500px;background-color:#ddd" >
-			        <iframe src=""  id="iframe_editPassword"  height="100%" width="100%" class="mh-100 bg-warnin" ></iframe>
+			        <iframe src=""  id="iframe_editPassword"  height="100%" width="100%" class="mh-100 bg-warnin" style="background:url('{% static 'images/systemImg/bkBrowserConsole.gif' %}')"></iframe>
 		        </div>
             </div>
         </div>

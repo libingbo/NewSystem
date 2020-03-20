@@ -9,6 +9,7 @@ from django.core.paginator import Paginator  #django自带的分页功能
 from django.db.models import Q   #搜索功能 模糊查询 要用到
 from .userEngine import *
 from django.views.decorators.csrf import requires_csrf_token
+from PIL import Image
 
 #完成用户登录
 def loginCheck(request):
@@ -243,8 +244,14 @@ def browserConsole(request):
         return render(request , 'login.html' , info )
     else:
         print('新闻发布者的session' + user_name)
-        info['headPhoto'] = "/static/images/UserHeadPhoto/a_default.jpg"  #静态文件的访问方式: http://localhost:8000/static下直接访问
-        return render(request , 'browserConsole.html', info)
+        user = Xwllyhb.objects.get(yhm=user_name)
+        if user.tx is  None:
+            info['headPhoto'] = "/static/images/UserHeadPhoto/a_default.jpg"  # 静态文件的访问方式: http://localhost:8000/static下直接访问
+            return render(request, 'browserConsole.html', info)
+        else:
+            info['headPhoto'] = "/static/images/UserHeadPhoto/" + user.tx  # 静态文件的访问方式: http://localhost:8000/static下直接访问
+            return render(request, 'browserConsole.html', info)
+
 
 
 #浏览者用户重置密码
@@ -268,12 +275,16 @@ def updateHeadPhoto(request):
     info = {}
     user_name = request.session.get('user_name')
     headPhoto = request.FILES.get('avatar_file')
+    file_suffix = headPhoto.name.split('.')[ -1]
     file_name = './static/images/UserHeadPhoto/'+user_name + '.'+ headPhoto.name.split('.')[ -1]  # 构造文件名以及文件路径
     if headPhoto.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
         info['formatError'] = "<h4>抱歉! 上传文件格式错误 , 系统支持的文件格式: jpeg , jpg , png </h4><br/><h4> 请您尝试重新上传</h4> <br/> "
         return HttpResponse(info['formatError'])
     with open(file_name, 'wb+') as f:
         f.write(headPhoto.read())
+        im = Image.open(f)
+        imBackground = im.resize((140 , 140)) #把用户传来的图片统一成140px的大小
+        imBackground.save(file_name, 'JPEG')  #设置存储格式和存储路径
         user = Xwllyhb.objects.get(yhm = user_name)
         user.tx = user_name +'.'+ headPhoto.name.split('.')[ -1]
         user.save()
